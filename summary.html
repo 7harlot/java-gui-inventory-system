@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>summary.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<p>HR Management &amp; Payroll System
+System Design, Implementation Approach, and Challenges Report</p>
+<ol>
+<li>Overview</li>
+</ol>
+<p>The HR Management &amp; Payroll System is a Java-based application designed to handle essential HR operations such as employee record management, department tracking, and payroll processing. Built with JavaFX for the user interface and Java Serialization for data persistence, the system is structured to support modular development, data encapsulation, and scalability for future enhancements like authentication and reporting.</p>
+<ol start="2">
+<li>System Architecture
+2.1 Architectural Pattern</li>
+</ol>
+<p>The application follows a modular layered architecture comprising three key layers:</p>
+<p>Layer Responsibility Key Components
+Presentation Layer Handles GUI interactions and user inputs. Main.java (JavaFX)
+Business Logic Layer Implements core functionality, payroll calculations, and data management. DataManager.java, PayrollCalculator.java
+Data Model Layer Represents domain objects and manages their relationships. Employee.java, Department.java, Payroll.java</p>
+<p>Each layer interacts through clearly defined interfaces, minimizing coupling and promoting maintainability.</p>
+<p>2.2 Project Directory Structure
+group-project/
+├── src/
+│ ├── Main.java # JavaFX main application entry point
+│ ├── model/
+│ │ ├── Employee.java # Employee entity
+│ │ ├── Department.java # Department entity
+│ │ └── Payroll.java # Payroll entity
+│ └── service/
+│ ├── DataManager.java # Handles persistence and CRUD operations
+│ └── PayrollCalculator.java # Handles all payroll computations
+├── data/ # Runtime-generated serialized files
+│ ├── employees.dat
+│ ├── departments.dat
+│ └── payrolls.dat
+└── instructions.pdf # Original project brief</p>
+<p>This structure ensures clear separation of concerns and supports iterative feature expansion.</p>
+<ol start="3">
+<li>System Components
+3.1 Data Model Layer</li>
+</ol>
+<p>Employee.java</p>
+<p>Represents individual employee records.</p>
+<p>Attributes include ID, name, department, employment type, and status.</p>
+<p>Implements Serializable for data persistence.</p>
+<p>Supports multiple employment types (Full-Time, Part-Time, Contract, Intern).</p>
+<p>Department.java</p>
+<p>Tracks departmental data and employee associations.</p>
+<p>Allows for manager assignment and dynamic employee listing.</p>
+<p>Payroll.java</p>
+<p>Encapsulates payroll information for each pay period.</p>
+<p>Handles gross pay, deductions, and net pay computation automatically.</p>
+<p>3.2 Business Logic Layer</p>
+<p>DataManager.java</p>
+<p>Implements a Singleton pattern to ensure centralized data management.</p>
+<p>Performs CRUD operations for employees, departments, and payroll records.</p>
+<p>Manages serialization/deserialization for persistent data storage.</p>
+<p>PayrollCalculator.java</p>
+<p>Contains the payroll computation engine.</p>
+<p>Supports both hourly and salaried employees.</p>
+<p>Calculates:</p>
+<p>Regular and overtime pay.</p>
+<p>Federal (15%) and state (5%) taxes.</p>
+<p>Social Security (6.2%) and Medicare (1.45%) deductions.</p>
+<p>Generates year-to-date summaries for financial tracking.</p>
+<p>3.3 Presentation Layer</p>
+<p>Main.java</p>
+<p>Launches the JavaFX application and initializes the main user interface.</p>
+<p>Contains a menu-driven layout with navigation for Employees, Departments, Payroll, and Reports.</p>
+<p>Placeholder views for yet-to-be-implemented features ensure forward compatibility.</p>
+<ol start="4">
+<li>Implementation Approach</li>
+</ol>
+<p>Phase 1 – Data Model Setup</p>
+<p>Define and test serializable model classes (Employee, Department, Payroll).</p>
+<p>Validate object relationships (e.g., Employee-Department linkage).</p>
+<p>Phase 2 – Data Persistence</p>
+<p>Implement DataManager for centralized data handling.</p>
+<p>Introduce automatic data saving on exit and reloading on startup.</p>
+<p>Phase 3 – Payroll Calculation Engine</p>
+<p>Develop modular PayrollCalculator to ensure isolated and testable computation logic.</p>
+<p>Abstract tax and deduction rates for future configuration.</p>
+<p>Phase 4 – GUI Development (Ongoing)</p>
+<p>Build modular scenes in JavaFX for each core function.</p>
+<p>Implement menu-driven navigation and placeholders for upcoming UIs.</p>
+<p>Phase 5 – Reporting and Advanced Features (Planned)</p>
+<p>Generate CSV/text-based reports.</p>
+<p>Integrate role-based authentication and attendance modules.</p>
+<ol start="5">
+<li>Data Flow</li>
+</ol>
+<p>User Input (via JavaFX GUI) →</p>
+<p>DataManager (handles CRUD and persistence) →</p>
+<p>Model Objects (Employee, Department, Payroll) →</p>
+<p>PayrollCalculator (applies business rules and computations) →</p>
+<p>Updated Data Serialized (saved in /data/ directory).</p>
+<p>This flow ensures data integrity and transparency between operations.</p>
+<ol start="6">
+<li>Identified Challenges and Potential Risks
+Area Challenge Potential Impact Mitigation Strategy
+Serialization Future schema changes may break backward compatibility. Loss or corruption of saved data. Implement version control or migrate to a lightweight DB (e.g., SQLite).
+GUI Development Complex TableView and dialog management for CRUD operations. UI inconsistency and event handling issues. Modularize UI controllers; use FXML for separation.
+Payroll Accuracy Fixed tax rates are hard-coded. Limits flexibility for real-world use. Move tax rates to configuration file or database.
+Concurrency Simultaneous data access (if multi-threaded UI). Possible data race conditions. Synchronize access in DataManager.
+Scalability Java serialization limits concurrent usage and large dataset handling. System slowdown with large employee datasets. Future-proof by planning migration to SQL/ORM (e.g., Hibernate).
+Reporting Generating formatted reports can be complex. Incomplete feature delivery. Start with CSV/text export; add chart visualization later.</li>
+<li>Next Steps</li>
+</ol>
+<p>Priority 1 – Employee Management UI
+Implement CRUD operations in GUI, with search/filter capabilities and form validation.</p>
+<p>Priority 2 – Department Management
+Enable employee assignment to departments and department hierarchy management.</p>
+<p>Priority 3 – Payroll Processing Interface
+Build interface to input hours, overtime, and bonuses.</p>
+<p>Priority 4 – Reporting
+Add export functionality for payroll and employee reports.</p>
+<p>Priority 5 – Advanced Enhancements
+Include authentication, role-based permissions, and graphical analytics via JavaFX charts.</p>
+<ol start="8">
+<li>Conclusion</li>
+</ol>
+<p>The HR Management &amp; Payroll System lays a solid foundation for a complete HR operations platform. Its modular architecture, consistent data handling, and clear expansion roadmap make it a maintainable and extensible solution for small to mid-scale HR departments.</p>
+<p>Future work should emphasize transitioning from serialized data to a relational database for better scalability, adding authentication for data security, and enhancing user experience with interactive reporting dashboards.</p>
+
+</body>
+</html>
